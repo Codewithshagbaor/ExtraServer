@@ -7,6 +7,8 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from .service import add_remove_online_user, updateLocationList, add_remove_room_user
 from asgiref.sync import sync_to_async
 from channels.db import database_sync_to_async
+from aiortc import RTCPeerConnection, RTCSessionDescription, RTCIceCandidate
+
 
 class ChatRoomConsumer(AsyncWebsocketConsumer):
     
@@ -30,7 +32,60 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
                 "event" : "online_traffic",
             }
         )
-    
+    async def call(self, user):
+        peer_connection = await self.createRTCPeerConnection(user.id)
+        await self.createAndSendOffer(user.id, peer_connection)
+
+    async def createRTCPeerConnection(self, user_id):
+        ice_server = RTCIceServer(urls="stun:bn-turn1.xirsys.com")
+        peer_connection = RTCPeerConnection(iceServers=[ice_server])
+
+        if self.localVideoStream:
+            for track in self.localVideoStream.getTracks():
+                peer_connection.addTrack(track, stream=self.localVideoStream)
+
+        peer_connection.onicecandidate = lambda event: self.handleICEcandidate(user_id, event)
+        peer_connection.ontrack = lambda event: self.handleAddStream(user_id, event)
+
+        return peer_connection
+
+    async def createAndSendOffer(self, user_id, peer_connection):
+        offer = await peer_connection.createOffer()
+        await peer_connection.setLocalDescription(offer)
+
+        # Send the offer to the other user
+        await self.send_offer(user_id, offer)
+    async def send_offer(self, user_id, offer):
+        await self.send(text_data=json.dumps({
+            'type': 'offer',
+            'offer': offer.sdp,
+            'to': user_id,
+            'from': self.user["id"]
+        }))
+    async def handleICEcandidate(self, user_id, event):
+        candidate = event.candidate
+        await self.send(text_data=json.dumps({
+            'type': 'candidate',
+            'candidate': {
+                'sdpMLineIndex': candidate.sdpMLineIndex,
+                'sdpMid': candidate.sdpMid,
+                'candidate': candidate.candidate
+            },
+            'to': user_id,
+            'from': self.user["id"]
+        }))
+    async def handleAddStream(self, user_id, event):
+        for channel_name in self.channel_layer.group_channels(self.room_group_name):
+            if channel_name != self.channel_name:
+                await self.channel_layer.send(
+                    channel_name,
+                    {
+                        'type': 'add_stream',
+                        'stream': event.streams[0],  # Assuming there is only one stream
+                        'from': self.user["id"],
+                        'to': user_id
+                    }
+                )    
     async def disconnect(self, close_code):      
         await self.channel_layer.group_send(
             self.room_group_name,
@@ -126,6 +181,8 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
                     "from" : from_
                 }
             )
+            await self.call(from_)
+
         
         elif msgType == "success_join":
             await self.channel_layer.group_send(
@@ -217,7 +274,14 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
                 'to': self.user,
                 'from': from_
             }))
-
+    async def add_stream(self, event):
+        # Receive the stream and send it to the respective user
+        await self.send(text_data=json.dumps({
+            'type': 'add_stream',
+            'stream': event['stream'],
+            'from': event['from'],
+            'to': event['to']
+        }))
 
     @database_sync_to_async
     def save_message(self, message):
