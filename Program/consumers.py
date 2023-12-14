@@ -30,7 +30,26 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
                 "event" : "online_traffic",
             }
         )
-    
+    async def call(self, user):
+        await self.createRTCPeerConnection(user)
+        await self.createAndSendOffer(user)
+
+    async def createRTCPeerConnection(self, user):
+        print("RTCPeerConnection connected")
+        peerConnection[user.id] = {
+            "name": user.name,
+            "id": user.id,
+            "pc": new RTCPeerConnection(ICEconfig)
+        }
+
+        if self.localVideoStream:
+            self.localVideoStream.getTracks().forEach(
+                (track) => peerConnection[user.id].pc.addTrack(track, self.localVideoStream)
+            )
+
+        peerConnection[user.id].pc.onicecandidate = lambda event: self.handleICEcandidate(user, event)
+        peerConnection[user.id].pc.ontrack = lambda event: self.handleAddStream(user, event)
+        
     async def disconnect(self, close_code):      
         await self.channel_layer.group_send(
             self.room_group_name,
@@ -126,6 +145,8 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
                     "from" : from_
                 }
             )
+            await self.call(from_)
+
         
         elif msgType == "success_join":
             await self.channel_layer.group_send(
