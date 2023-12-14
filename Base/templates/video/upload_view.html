@@ -1,0 +1,222 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block title %}Upload Video{% endblock %}
+{% block content %}
+<main class="h-full overflow-y-auto">
+  <div class="container px-6 mx-auto grid">
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      Upload Video
+    </h2>
+    <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <form id="uploadForm" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label class="block text-sm">
+          <span class="text-gray-700 dark:text-gray-400">Title</span>
+          <!-- focus-within sets the color for the icon when input is focused -->
+          <div class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400">
+            <input class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input" type="text" id="title" name="title" required>
+            <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M13.5 5.5L6.45321 12.5468C6.22845 12.7716 6.11607 12.8839 6.04454 13.0229C5.97301 13.1619 5.94689 13.3187 5.89463 13.6322L5.11508 18.3095C5.06262 18.6243 5.03639 18.7817 5.12736 18.8726C5.21833 18.9636 5.37571 18.9374 5.69048 18.8849L10.3678 18.1054L10.3678 18.1054C10.6813 18.0531 10.8381 18.027 10.9771 17.9555C11.1161 17.8839 11.2284 17.7716 11.4532 17.5468L11.4532 17.5468L18.5 10.5C19.5171 9.48295 20.0256 8.97442 20.1384 8.36277C20.1826 8.12295 20.1826 7.87705 20.1384 7.63723C20.0256 7.02558 19.5171 6.51705 18.5 5.5C17.4829 4.48295 16.9744 3.97442 16.3628 3.8616C16.1229 3.81737 15.8771 3.81737 15.6372 3.8616C15.0256 3.97442 14.5171 4.48294 13.5 5.5Z" fill="#2A4157" fill-opacity="0.24"></path> <path d="M12.2929 6.70711L6.45321 12.5468C6.22845 12.7716 6.11607 12.8839 6.04454 13.0229C5.97301 13.1619 5.94689 13.3187 5.89463 13.6322L5.11508 18.3095C5.06262 18.6243 5.03639 18.7817 5.12736 18.8726C5.21833 18.9636 5.37571 18.9374 5.69048 18.8849L10.3678 18.1054L10.3678 18.1054C10.6813 18.0531 10.8381 18.027 10.9771 17.9555C11.1161 17.8839 11.2284 17.7716 11.4532 17.5468L11.4532 17.5468L17.2929 11.7071C17.6262 11.3738 17.7929 11.2071 17.7929 11C17.7929 10.7929 17.6262 10.6262 17.2929 10.2929L17.2929 10.2929L13.7071 6.70711C13.3738 6.37377 13.2071 6.20711 13 6.20711C12.7929 6.20711 12.6262 6.37377 12.2929 6.70711Z" fill="#222222"></path> </g></svg>
+            </div>
+          </div>
+        </label>
+
+        <label class="block text-sm">
+          <span class="text-gray-700 dark:text-gray-400">Description</span>
+          <!-- focus-within sets the color for the icon when input is focused -->
+          <div class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400">
+            <textarea name="description" id="description" cols="30" rows="5" class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input" required></textarea>
+            <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 12C20 9.19974 20 7.79961 19.455 6.73005C18.9757 5.78924 18.2108 5.02433 17.27 4.54497C16.2004 4 14.8003 4 12 4C9.19974 4 7.79961 4 6.73005 4.54497C5.78924 5.02433 5.02433 5.78924 4.54497 6.73005C4 7.79961 4 9.19974 4 12V18C4 18.9428 4 19.4142 4.29289 19.7071C4.58579 20 5.05719 20 6 20H12C14.8003 20 16.2004 20 17.27 19.455C18.2108 18.9757 18.9757 18.2108 19.455 17.27C20 16.2004 20 14.8003 20 12Z" fill="#2A4157" fill-opacity="0.24"></path> <path d="M8.5 12.5L15.5 12.5" stroke="#222222" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8.5 15.5L13.5 15.5" stroke="#222222" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17.5 3.5V9.5" stroke="#222222" stroke-linecap="round"></path> <path d="M14.5 6.5H20.5" stroke="#222222" stroke-linecap="round"></path> </g></svg>
+            </div>
+          </div>
+        </label>
+        <br>
+        <label class="custum-file-upload" for="file">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+              <g stroke-width="0" id="SVGRepo_bgCarrier"></g>
+              <g stroke-linejoin="round" stroke-linecap="round" id="SVGRepo_tracerCarrier"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path fill=""
+                  d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                  clip-rule="evenodd" fill-rule="evenodd"></path>
+              </g>
+            </svg>
+          </div>
+          <div class="text">
+            <span>Click to upload image</span>
+          </div>
+          <input type="file" id="file" name="uploaded_file">
+        </label>
+        <div id="messageContainer" style="display: none;">
+          <div id="loadingSpinner" style="display: none;">Uploading file...</div>
+          <div id="successMessage" style="display: none;">File uploaded successfully.</div>
+          <div id="errorMessage" style="display: none;">Hang tight, we are uploading...</div>
+        </div>
+        <br>
+        <div>
+          <button class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple w-full">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function() {
+    var uploadTimeout;
+    var messageContainer = $('#messageContainer');
+    var loadingSpinner = $('#loadingSpinner');
+    var successMessage = $('#successMessage');
+    var errorMessage = $('#errorMessage');
+    
+    var randomMessages = [
+      'Just a moment, we are uploading...',
+      'Hold on, the upload is in progress...',
+      'Your file is making its way to the server...',
+      'We are preparing your upload, hang tight...'
+    ];
+    
+    function getRandomMessage() {
+      var randomIndex = Math.floor(Math.random() * randomMessages.length);
+      return randomMessages[randomIndex];
+    }
+    
+    function updateRandomMessage() {
+      loadingSpinner.html(getRandomMessage());
+    }
+    
+    function checkInternetConnection(callback) {
+      var image = new Image();
+      image.onload = function() {
+        callback(true);
+      };
+      image.onerror = function() {
+        callback(false);
+      };
+      image.src = 'https://www.freecodecamp.org/news/content/images/size/w2000/2020/07/js_online_offline.png'; // Use an actual URL here
+    }
+    
+    $('#uploadForm').submit(function(event) {
+      event.preventDefault();
+      
+      var formData = new FormData(this);
+      
+      checkInternetConnection(function(isConnected) {
+        if (!isConnected) {
+          errorMessage.html('No internet connection. Please check your network.');
+          errorMessage.show();
+          return;
+        }
+        
+        messageContainer.show();
+        loadingSpinner.show();
+        successMessage.hide();
+        errorMessage.hide();
+        
+        // Update random message every second
+        uploadTimeout = setInterval(updateRandomMessage, 5000);
+        
+        $.ajax({
+          type: 'POST',
+          url: '{% url "upload_file" %}',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function(data) {
+            clearInterval(uploadTimeout);
+            loadingSpinner.hide();
+            successMessage.show();
+            $('#uploadForm')[0].reset();
+          },
+          error: function(xhr, textStatus, errorThrown) {
+            clearInterval(uploadTimeout);
+            loadingSpinner.hide();
+            if (textStatus === 'timeout') {
+              errorMessage.html('Upload timeout. Please check your connection.');
+            } else {
+              errorMessage.html('An error occurred. Please try again.');
+            }
+            errorMessage.show();
+          }
+        });
+      });
+    });
+  });
+  </script>
+  
+<style>
+  .custum-file-upload {
+    height: 200px;
+    width: %;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    gap: 20px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #cacaca;
+    background-color: rgba(255, 255, 255, 1);
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 48px 35px -48px rgba(0, 0, 0, 0.1);
+  }
+
+  .custum-file-upload .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custum-file-upload .icon svg {
+    height: 80px;
+    fill: rgba(75, 85, 99, 1);
+  }
+
+  .custum-file-upload .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custum-file-upload .text span {
+    font-weight: 400;
+    color: rgba(75, 85, 99, 1);
+  }
+
+  .custum-file-upload input {
+    display: none;
+  }
+  #messageContainer {
+  text-align: center;
+  display: none;
+  margin-top: 10px;
+}
+
+#loadingSpinner,
+#successMessage,
+#errorMessage {
+  display: none;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#loadingSpinner::before {
+  content: "🔄 ";
+}
+
+#successMessage::before {
+  content: "✅ ";
+  color: green;
+}
+
+#errorMessage::before {
+  content: "❌ ";
+  color: red;
+}
+</style>
+{% endblock %}

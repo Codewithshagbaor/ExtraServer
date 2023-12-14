@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Programs - MediconnectExtra{% endblock %}
+{% block content %}
+
+<div class="slider-area">
+  <div class="slider-height2 slider-bg2 d-flex align-items-center">
+  </div>
+</div>
+
+  <div class="class-offer-area section-padding">
+    <div class="container">
+        <div class="row justify-content-center mb-25">
+            <div class="col-xl-12">
+
+                <div class="section-tittle text-center">
+                    <span>Programs</span>
+                    <h2>Ongoing Programs</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+          {% for program in programs reversed %}
+            <div class="col-lg-6 col-md-6 col-sm-6">
+
+                <div class="properties pb-30">
+                    <div class="properties__card">
+                        <div class="properties__img" id="dynamic-background-div-{{ forloop.counter }}" style="text-align: center; display: flex; align-items: center; justify-content: center; color: #fff; padding: 20px;" >
+                          {{ program.title|first }}
+                        </div>
+                        <script>
+                          document.addEventListener('DOMContentLoaded', function() {
+                            // JavaScript code to generate a random color and set it as the background
+                            var dynamicBackgroundDiv = document.getElementById('dynamic-background-div-{{ forloop.counter }}');
+                            var randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+                            dynamicBackgroundDiv.style.backgroundColor = randomColor;
+                          });
+                        </script>
+                        <div class="properties__caption">
+                            <h3><a href="#">{{ program.title }}</a></h3>
+                            <p>Sedac odio aliquet, fringilla odio eget, tincidunt nunc duis aliquet pulvinar
+                                ante start in life and the opportunity to learn. </p>
+                        </div>
+                        <div
+                            class="properties__footer d-flex flex-wrap justify-content-between align-items-center">
+                            <div class="class-day">
+                            </div>
+                            <div class="class-day">
+                            </div>
+                            <div class="class-day">
+                              {% if program.event_date|event_status == 'Finished' %}
+                                <a type="button" class="genric-btn danger">Finished</a>
+                              {% else %}
+                                {% with chat_room=program.comp_host_link %}
+                                {% if chat_room.room_id %}
+                                <a href="{% url 'add_me_to_room' room_id=chat_room.room_id %}" class="btn_01">Stream</a>
+                                {% else %}
+                                <a type="button" class="genric-btn warning">No Stream</a>
+                                {% endif %}
+                                {% endwith %}
+                              {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <nav class="blog-pagination justify-content-center d-flex">
+          <ul class="pagination">
+      
+              {% if programs.has_previous %}
+              <li class="page-item">
+                  <a href="?page=1" class="page-link" aria-label="First Page">
+                      <i class="ti-angle-double-left"></i>
+                  </a>
+              </li>
+              <li class="page-item">
+                  <a href="?page={{ programs.previous_page_number }}" class="page-link" aria-label="Previous">
+                      <i class="ti-angle-left"></i>
+                  </a>
+              </li>
+              {% endif %}
+      
+              <li class="page-item">
+                  <a href="?page={{ programs.number }}" class="page-link">{{ programs.number }}</a>
+              </li>
+      
+              {% if programs.has_next %}
+              <li class="page-item">
+                  <a href="?page={{ programs.next_page_number }}" class="page-link" aria-label="Next">
+                      <i class="ti-angle-right"></i>
+                  </a>
+              </li>
+              <li class="page-item">
+                  <a href="?page={{ programs.paginator.num_pages }}" class="page-link" aria-label="Last Page">
+                      <i class="ti-angle-double-right"></i>
+                  </a>
+              </li>
+              {% endif %}
+      
+          </ul>
+      </nav>
+      
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}Contact Us{% endblock %}
+{% block content %}
+<div class="slider-area">
+  <div class="slider-height2 slider-bg2 d-flex align-items-center">
+  </div>
+</div>
+<div class="container">
+  <div class="adding_div">
+    <h1 id="adding-message">Submitted</h1>
+    <p id="wait-message">{{contact.name}} Message Sent!!!</p>
+  </div>
+</div>
+<style>
+  .adding_div{
+    width: 50%;
+    margin: 20px auto;
+    background-color: #fbf9ff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  #wait-message{
+      font-size: 24px;
+      margin-bottom: 10px;
+  }
+  @media screen and (max-width: 768px){
+    .adding_div{
+    width: 100%;
+  }
+  }
+</style>
+{% endblock %}

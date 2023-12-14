@@ -1,0 +1,53 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block title %}Create Program{% endblock %}
+{% block content %}
+<main class="h-full overflow-y-auto">
+  <div class="container px-6 mx-auto grid">
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      Add a Program
+    </h2>
+    <div class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800">
+      <form action="" method="POST">
+        {% csrf_token %}
+        <label class="block text-sm">
+          <span class="text-gray-700 dark:text-gray-400">Title</span>
+          <!-- focus-within sets the color for the icon when input is focused -->
+          <div class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400">
+            <input class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input" type="text" id="title" name="title" required>
+            <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M13.5 5.5L6.45321 12.5468C6.22845 12.7716 6.11607 12.8839 6.04454 13.0229C5.97301 13.1619 5.94689 13.3187 5.89463 13.6322L5.11508 18.3095C5.06262 18.6243 5.03639 18.7817 5.12736 18.8726C5.21833 18.9636 5.37571 18.9374 5.69048 18.8849L10.3678 18.1054L10.3678 18.1054C10.6813 18.0531 10.8381 18.027 10.9771 17.9555C11.1161 17.8839 11.2284 17.7716 11.4532 17.5468L11.4532 17.5468L18.5 10.5C19.5171 9.48295 20.0256 8.97442 20.1384 8.36277C20.1826 8.12295 20.1826 7.87705 20.1384 7.63723C20.0256 7.02558 19.5171 6.51705 18.5 5.5C17.4829 4.48295 16.9744 3.97442 16.3628 3.8616C16.1229 3.81737 15.8771 3.81737 15.6372 3.8616C15.0256 3.97442 14.5171 4.48294 13.5 5.5Z" fill="#2A4157" fill-opacity="0.24"></path> <path d="M12.2929 6.70711L6.45321 12.5468C6.22845 12.7716 6.11607 12.8839 6.04454 13.0229C5.97301 13.1619 5.94689 13.3187 5.89463 13.6322L5.11508 18.3095C5.06262 18.6243 5.03639 18.7817 5.12736 18.8726C5.21833 18.9636 5.37571 18.9374 5.69048 18.8849L10.3678 18.1054L10.3678 18.1054C10.6813 18.0531 10.8381 18.027 10.9771 17.9555C11.1161 17.8839 11.2284 17.7716 11.4532 17.5468L11.4532 17.5468L17.2929 11.7071C17.6262 11.3738 17.7929 11.2071 17.7929 11C17.7929 10.7929 17.6262 10.6262 17.2929 10.2929L17.2929 10.2929L13.7071 6.70711C13.3738 6.37377 13.2071 6.20711 13 6.20711C12.7929 6.20711 12.6262 6.37377 12.2929 6.70711Z" fill="#222222"></path> </g></svg>
+            </div>
+          </div>
+        </label>
+        <label class="block text-sm">
+          <span class="text-gray-700 dark:text-gray-400">Event date</span>
+          <!-- focus-within sets the color for the icon when input is focused -->
+          <div class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400">
+            <input class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input" type="date" id="event_date" name="event_date" required>
+            <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M7 4.43245C7 4.27684 7 4.19903 6.9491 4.15423C6.89819 4.10944 6.82244 4.11915 6.67094 4.13857C5.54965 4.28229 4.76806 4.57508 4.17157 5.17157C3 6.34315 3 8.22876 3 12C3 15.7712 3 17.6569 4.17157 18.8284C5.34315 20 7.22876 20 11 20H13C16.7712 20 18.6569 20 19.8284 18.8284C21 17.6569 21 15.7712 21 12C21 8.22876 21 6.34315 19.8284 5.17157C19.2319 4.57508 18.4504 4.28229 17.3291 4.13857C17.1776 4.11915 17.1018 4.10944 17.0509 4.15424C17 4.19903 17 4.27684 17 4.43245L17 6.5C17 7.32843 16.3284 8 15.5 8C14.6716 8 14 7.32843 14 6.5L14 4.30005C14 4.15898 14 4.08844 13.9561 4.04451C13.9123 4.00059 13.8418 4.0005 13.7009 4.00031C13.4748 4 13.2412 4 13 4H11C10.7588 4 10.5252 4 10.2991 4.00031C10.1582 4.0005 10.0877 4.00059 10.0439 4.04452C10 4.08844 10 4.15898 10 4.30005L10 6.5C10 7.32843 9.32843 8 8.50001 8C7.67158 8 7 7.32843 7 6.5L7 4.43245Z" fill="#2A4157" fill-opacity="0.24"></path> <path d="M8.5 2.5L8.5 6.5" stroke="#222222" stroke-linecap="round"></path> <path d="M15.5 2.5L15.5 6.5" stroke="#222222" stroke-linecap="round"></path> <circle cx="7.5" cy="10.5" r="0.5" fill="#222222"></circle> <circle cx="10.5" cy="10.5" r="0.5" fill="#222222"></circle> <circle cx="13.5" cy="10.5" r="0.5" fill="#222222"></circle> <circle cx="16.5" cy="10.5" r="0.5" fill="#222222"></circle> <circle cx="7.5" cy="13.5" r="0.5" fill="#222222"></circle> <circle cx="10.5" cy="13.5" r="0.5" fill="#222222"></circle> <circle cx="13.5" cy="13.5" r="0.5" fill="#222222"></circle> <circle cx="16.5" cy="13.5" r="0.5" fill="#222222"></circle> <circle cx="7.5" cy="16.5" r="0.5" fill="#222222"></circle> <circle cx="10.5" cy="16.5" r="0.5" fill="#222222"></circle> <circle cx="13.5" cy="16.5" r="0.5" fill="#222222"></circle> <circle cx="16.5" cy="16.5" r="0.5" fill="#222222"></circle> </g></svg>
+            </div>
+          </div>
+        </label>
+        <label class="block text-sm">
+          <span class="text-gray-700 dark:text-gray-400">Description</span>
+          <!-- focus-within sets the color for the icon when input is focused -->
+          <div class="relative text-gray-500 focus-within:text-purple-600 dark:focus-within:text-purple-400">
+            <input class="block w-full pl-10 mt-1 text-sm text-black dark:text-gray-300 dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:focus:shadow-outline-gray form-input" type="text" name="description" id="description" required>
+            <div class="absolute inset-y-0 flex items-center ml-3 pointer-events-none">
+              <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M20 12C20 9.19974 20 7.79961 19.455 6.73005C18.9757 5.78924 18.2108 5.02433 17.27 4.54497C16.2004 4 14.8003 4 12 4C9.19974 4 7.79961 4 6.73005 4.54497C5.78924 5.02433 5.02433 5.78924 4.54497 6.73005C4 7.79961 4 9.19974 4 12V18C4 18.9428 4 19.4142 4.29289 19.7071C4.58579 20 5.05719 20 6 20H12C14.8003 20 16.2004 20 17.27 19.455C18.2108 18.9757 18.9757 18.2108 19.455 17.27C20 16.2004 20 14.8003 20 12Z" fill="#2A4157" fill-opacity="0.24"></path> <path d="M8.5 12.5L15.5 12.5" stroke="#222222" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M8.5 15.5L13.5 15.5" stroke="#222222" stroke-linecap="round" stroke-linejoin="round"></path> <path d="M17.5 3.5V9.5" stroke="#222222" stroke-linecap="round"></path> <path d="M14.5 6.5H20.5" stroke="#222222" stroke-linecap="round"></path> </g></svg>
+            </div>
+          </div>
+        </label>
+        <br>
+        <div>
+          <button class="px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+{% endblock %}

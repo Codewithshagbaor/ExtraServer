@@ -1,0 +1,136 @@
+{% load static %}
+<!doctype html>
+<html class="no-js" lang="zxx">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="https://f005.backblazeb2.com/file/CyberMedia/Style/img/med-lg+(1).png">
+    
+
+    <link rel="stylesheet" href="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/css/slicknav.css">
+    <link rel="stylesheet" href="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/css/animate.min.css">
+    <link rel="stylesheet" href="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/css/themify-icons.css">
+    <link rel="stylesheet" href="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/css/slick.css">
+    <link rel="stylesheet" href="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/css/nice-select.css">
+    <link rel="stylesheet" href="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/css/style.css">
+  </head>
+
+  <body>
+    <header>
+      <div class="header-area header-transparent">
+        <div class="main-header ">
+          <div class="header-bottom  header-sticky">
+            <div class="container-fluid">
+              <div class="d-flex align-items-center justify-content-between flex-wrap position-relative">
+
+                <div class="left-side d-flex align-items-center">
+                  <div class="logo">
+                    <a href="/">MediconnectExtra</a>
+                  </div>
+
+                  <div class="main-menu d-none d-lg-block">
+                    <nav>
+                      <ul id="navigation">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="{% url 'program_all' %}">Programs</a></li>
+                        <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+                      </ul>
+                    </nav>
+                  </div>
+                </div>
+                <div class="header-right-btn f-right  ml-15">
+                  <a href="/join/cde5f3f9-0/" class="btn_1 header-btn"><i class="fas fa-video"></i>Stream Now</a>
+                </div>
+
+                <div class="col-12">
+                  <div class="mobile_menu d-block d-lg-none"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      {% block content %}
+      {% endblock %}
+    </main>
+    <br><br>
+    <footer>
+      <div class="footer-wrapper">
+        <div class="footer-area footer-padding">
+          <div class="container">
+            <div class="row justify-content-between">
+              <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
+                <div class="single-footer-caption mb-50">
+                  <div class="single-footer-caption mb-30">
+
+                    <div class="footer-logo mb-25">
+                      <a href="/">MediconnectExtra</a>
+                    </div>
+                    <div class="footer-tittle">
+                      <div class="footer-pera">
+                        <p>a description here.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xxl-2 col-xl-2 col-lg-3 col-md-4 col-sm-6">
+                <div class="single-footer-caption mb-50">
+                  <div class="footer-tittle">
+                    <h4>Navigation</h4>
+                    <ul>
+                      <li><a href="{% url 'index' %}">Home</a></li>
+                      <li><a href="{% url 'program_all' %}">Programs</a></li>
+                      <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-4 col-sm-6">
+                <div class="single-footer-caption mb-50">
+                  <div class="footer-tittle">
+                    <h4>Contact Us</h4>
+                    <ul>
+                      <li><a href="mailto:mymediconnect.co@gmail.com">mymediconnect.co@gmail.com</a></li>
+                      <li><a href="tel:+2347065813394"> +2347065813394,</a> <a href="tel:+2348163148056">+2348163148056</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/vendor/modernizr-3.5.0.min.js"></script>
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/vendor/jquery-1.12.4.min.js"></script>
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/popper.min.js"></script>
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/bootstrap.min.js"></script>
+
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/owl.carousel.min.js"></script>
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/slick.min.js"></script>
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/jquery.slicknav.min.js"></script>
+
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/wow.min.js"></script>
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/jquery.nice-select.min.js"></script>
+
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/jquery.form.js"></script>
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/jquery.validate.min.js"></script>
+
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/plugins.js"></script>
+    <script src="https://cybermedia.s3.us-east-005.backblazeb2.com/static/assets/js/main.js"></script>
+  </body>
+
+</html>

@@ -1,0 +1,216 @@
+{% extends 'admin_base.html' %}
+{% load static %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<main class="h-full overflow-y-auto">
+  <div class="container px-6 mx-auto grid">
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      Dashboard
+    </h2>
+    <!-- Cards -->
+    <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
+      <!-- Card -->
+      <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <div class="p-3 mr-4 text-orange-500 bg-orange-100 rounded-full dark:text-orange-300 dark:bg-orange-100">
+          <svg class="w-5 h-5" viewbox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" transform="matrix(1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M5 5C5 3.89543 5.89543 3 7 3H11.75C11.8881 3 12 3.11193 12 3.25V8C12 9.10457 12.8954 10 14 10H18.75C18.8881 10 19 10.1119 19 10.25V19C19 20.1046 18.1046 21 17 21H7C5.89543 21 5 20.1046 5 19V5Z" fill="#ff5a1f" fill-opacity="0.24"></path> <path d="M13 8V3.60355C13 3.38083 13.2693 3.26929 13.4268 3.42678L18.5732 8.57322C18.7307 8.73071 18.6192 9 18.3964 9H14C13.4477 9 13 8.55228 13 8Z" fill="#ff5a1f"></path> <path d="M8.5 13.5L14.5 13.5" stroke="#ff5a1f" stroke-linecap="round"></path> <path d="M8.5 16.5L13.5 16.5" stroke="#ff5a1f" stroke-linecap="round"></path> </g></svg>
+        </div>
+        <div>
+          <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+            Total Programs
+          </p>
+          <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+            {{program}}
+          </p>
+        </div>
+      </div>
+      <!-- Card -->
+      <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full dark:text-green-100 dark:bg-green-500">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21ZM9.73666 7.86847L16.2111 11.1057C16.9482 11.4742 16.9482 12.526 16.2111 12.8946L9.73666 16.1318C8.93878 16.5308 8 15.9506 8 15.0585V8.94178C8 8.04972 8.93878 7.46953 9.73666 7.86847Z" fill="#0e9f6e" fill-opacity="0.24"></path> <path d="M16.2111 11.1056L9.73666 7.86833C8.93878 7.46939 8 8.04958 8 8.94164V15.0584C8 15.9504 8.93878 16.5306 9.73666 16.1317L16.2111 12.8944C16.9482 12.5259 16.9482 11.4741 16.2111 11.1056Z" stroke="#0e9f6e" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path> <circle cx="12" cy="12" r="9" stroke="#0e9f6e" stroke-width="1.2"></circle> </g></svg>
+        </div>
+        <div>
+          <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+            Videos
+          </p>
+          <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+            {{videos}}
+          </p>
+        </div>
+      </div>
+      <!-- Card -->
+      <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full dark:text-blue-100 dark:bg-blue-500">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill-rule="evenodd" clip-rule="evenodd" d="M2.45548 11.1164C3.53103 9.23425 6.5557 5 11.9999 5C17.4442 5 20.4689 9.23425 21.5444 11.1164C21.7651 11.5025 21.8754 11.6956 21.8632 11.9836C21.8511 12.2716 21.7214 12.4598 21.462 12.8362C20.1817 14.6935 16.7061 19 11.9999 19C7.29383 19 3.81814 14.6935 2.53794 12.8362C2.27851 12.4598 2.1488 12.2716 2.13665 11.9836C2.1245 11.6956 2.23483 11.5025 2.45548 11.1164ZM11.9999 15C13.6568 15 14.9999 13.6569 14.9999 12C14.9999 10.3431 13.6568 9 11.9999 9C10.3431 9 8.99994 10.3431 8.99994 12C8.99994 13.6569 10.3431 15 11.9999 15Z" fill="#3f83f8" fill-opacity="0.24"></path> <path d="M12 5C6.55576 5 3.53109 9.23425 2.45554 11.1164C2.23488 11.5025 2.12456 11.6956 2.1367 11.9836C2.14885 12.2716 2.27857 12.4598 2.53799 12.8362C3.8182 14.6935 7.29389 19 12 19C16.7061 19 20.1818 14.6935 21.462 12.8362C21.7214 12.4598 21.8511 12.2716 21.8633 11.9836C21.8754 11.6956 21.7651 11.5025 21.5445 11.1164C20.4689 9.23425 17.4442 5 12 5Z" stroke="#3f83f8" stroke-width="1.2"></path> <circle cx="12" cy="12" r="3" stroke="#3f83f8" stroke-width="1.2"></circle> </g></svg>
+        </div>
+        <div>
+          <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+            Total Views
+          </p>
+          <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+            {{views}}
+          </p>
+        </div>
+      </div>
+      <!-- Card -->
+      <div class="flex items-center p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full dark:text-teal-100 dark:bg-teal-500">
+          <svg class="w-5 h-5" fill="currentColor" viewbox="0 0 20 20">
+            <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <div>
+          <p class="mb-2 text-sm font-medium text-gray-600 dark:text-gray-400">
+            Total Comments
+          </p>
+          <p class="text-lg font-semibold text-gray-700 dark:text-gray-200">
+            {{comment}}
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Table -->
+    <div class="w-full overflow-hidden rounded-lg shadow-xs">
+      <div class="w-full overflow-x-auto">
+        <table class="w-full whitespace-no-wrap">
+          <thead>
+            <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+              <th class="px-4 py-3">User</th>
+              <th class="px-4 py-3">Comment</th>
+              <th class="px-4 py-3">Video</th>
+              <th class="px-4 py-3">Date</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
+            {% for comment in comments %}
+            <tr class="text-gray-700 dark:text-gray-400">
+              <td class="px-4 py-3">
+                <div class="flex items-center text-sm">
+                  <!-- Avatar with inset shadow -->
+                  <div class="relative hidden w-8 h-8 mr-3 rounded-full md:block">
+                    <img class="object-cover w-full h-full rounded-full" src="{% static 'flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ' %}" alt="" loading="lazy">
+                    <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
+                  </div>
+                  <div>
+                    <p class="font-semibold">{{ comment.username }}</p>
+                  </div>
+                </div>
+              </td>
+              <td class="px-4 py-3 text-sm">
+                {{ comment.comment_text }}
+              </td>
+              <td class="px-4 py-3 text-xs">
+                  {{ comment.video }}
+              </td>
+              <td class="px-4 py-3 text-sm">
+                6/10/2020
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      <div class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+        <span class="flex items-center col-span-3">
+            Showing {{ comment_range_start }}-{{ comment_range_end }} of {{ total_comments }}
+        </span>
+        <span class="col-span-2"></span>
+        <!-- Pagination -->
+        <span class="flex col-span-4 mt-2 sm:mt-auto sm:justify-end">
+            <nav aria-label="Table navigation">
+                <ul class="inline-flex items-center">
+                    {% if comments.has_previous %}
+                        <li>
+                            <a href="?page=1" class="px-3 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                                aria-label="First Page">
+                                <svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
+                                    <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
+                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page={{ comments.previous_page_number }}"
+                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
+                                aria-label="Previous">
+                                {{ comments.previous_page_number }}
+                            </a>
+                        </li>
+                    {% endif %}
+                    <li>
+                        <span class="px-3 py-1 rounded-md bg-purple-600 text-white">
+                            {{ comments.number }}
+                        </span>
+                    </li>
+                    {% if comments.has_next %}
+                        <li>
+                            <a href="?page={{ comments.next_page_number }}"
+                                class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
+                                aria-label="Next">
+                                {{ comments.next_page_number }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?page={{ comments.paginator.num_pages }}"
+                                class="px-3 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                                aria-label="Last Page">
+                                <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
+                                    <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+                                        clip-rule="evenodd" fill-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </span>
+    </div>
+    </div>
+
+    <!-- Charts -->
+    <h2 class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200">
+      Charts
+    </h2>
+    <div class="grid gap-6 mb-8 md:grid-cols-2">
+      <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+          Traffic
+        </h4>
+        <canvas id="line"></canvas>
+        <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+          <!-- Chart legend -->
+          <div class="flex items-center">
+            <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
+            <span>Organic</span>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
+            <span>Paid</span>
+          </div>
+        </div>
+      </div>
+      <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+          Revenue
+        </h4>
+        <canvas id="pie"></canvas>
+        <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+          <!-- Chart legend -->
+          <div class="flex items-center">
+            <span class="inline-block w-3 h-3 mr-1 bg-blue-1000 rounded-full"></span>
+            <span>Shirts</span>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
+            <span>Shoes</span>
+          </div>
+          <div class="flex items-center">
+            <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
+            <span>Bags</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

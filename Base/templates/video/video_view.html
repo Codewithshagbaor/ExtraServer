@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{video.title |title}} - MediconnectExtra{% endblock %}
+{% block content %}
+<link href="https://vjs.zencdn.net/8.5.2/video-js.css" rel="stylesheet" />
+<link href="https://unpkg.com/@videojs/themes@1/dist/city/index.css" rel="stylesheet">
+<div class="slider-area">
+  <div class="slider-height2 slider-bg2 d-flex align-items-center">
+  </div>
+</div>
+<div class="app-container">
+  <div class="sidebar left-sidebar">
+  </div>
+  <div class="video-container">
+    
+    <h1 style="text-align: left;">{{video.title |title}}</h1>
+    <video id="videoPlayer" class="video-js" controls preload="auto" width="800" height="400" data-setup="{}">
+      <source src="{{video.video_file.url}}" type="video/mp4" />
+      <p class="vjs-no-js">
+        To view this video please enable JavaScript, and consider upgrading to a
+        web browser that
+        <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+      </p>
+    </video>
+
+  </div>
+  <div class="sidebar right-sidebar">
+    <span>Comments</span>
+    <div class="chat">
+      <div id="messages" class="chat-scroll">
+        {% for comment in comments %}
+        <div class="message">
+          <div class="user-info">
+            <img
+              src="https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg"
+              alt="User">
+            <span class="user-name">{{ comment.username }}</span>
+          </div>
+          <p class="message-content">{{ comment.comment_text }}</p>
+        </div>
+        {% empty %}
+        <p class="message-content">Be the first to comment</p>
+        {% endfor %}
+      </div>
+
+  </div>
+  <br>
+  <div>
+      <form id="comment-form">
+        <div class="feedback-container">
+          <input type="text" name="Fullname" placeholder="Full Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Full Name'" required="" class="single-input" style="    border: 1px solid #cbd5e0; border-radius: 0.25rem;" id="username"><br>
+          <textarea placeholder="Enter your Comment" class="single-textarea" required style="    border: 1px solid #cbd5e0; border-radius: 0.25rem;" id="comment-text"></textarea><br>
+          <button type="submit" class="genric-btn success radiuss">Submit</button>
+        </div>
+      </form>
+    </div>
+</div>
+<script src="https://vjs.zencdn.net/8.5.2/video.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  // Asynchronous POST request to record the view
+  fetch(`/video/{{ video.id }}/record-view/`, {
+      method: 'POST',
+      headers: {
+          'X-CSRFToken': '{{ csrf_token }}',
+      },
+  });
+</script>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+  .app-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    height: 80vh;
+    /* Adjusted height */
+    margin-top: 20px;
+    /* Added margin */
+    margin-bottom: 20px;
+    /* Added margin */
+  }
+
+  .sidebar {
+    width: 500px;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .left-sidebar {
+    margin-right: 20px;
+    display: none !important;
+  }
+
+  .video-container {
+    flex: 2;
+    /* Adjusted flex value */
+
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+.video-js{
+    flex: 2;
+    /* Adjusted flex value */
+
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #videoPlayer {
+    max-width: 100%;
+    max-height: 100%;
+    /* Adjusted to maintain aspect ratio */
+    border-radius: 8px;
+  }
+
+  .chat {
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    padding: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  /* For Messages */
+  .chat-scroll {
+    max-height: 250px;
+    /* Set the maximum height */
+    overflow-y: auto;
+    /* Enable vertical scrolling */
+  }
+
+
+  .message {
+    align-items: flex-start;
+    /* Align items at the start of the flex container */
+    margin-bottom: 10px;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    /* Align user image and name vertically */
+    margin-right: 10px;
+  }
+
+  .user-info img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+    /* Adjust spacing */
+  }
+
+  .user-name {
+    font-weight: bold;
+  }
+
+  .message-content {
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-top: 2px;
+    /* Add margin between user info and message */
+  }
+</style>
+<style>
+  
+  /* Mobile Styles */
+  @media screen and (max-width: 768px) {
+    .app-container {
+      display: block;
+    }
+  
+    .sidebar, .video-container{
+      width: 90%;
+    }
+    .right-sidebar{
+      width: 90%;
+    }
+  
+    /* Adjust video player styles */
+    .video-container {
+      max-width: 1000px; /* Adjust the maximum width for larger screens */
+    }
+  
+    .video-js {
+      padding-bottom: 45%; /* Adjust the aspect ratio for larger screens if needed */
+    }
+  }
+  
+  
+  </style>
+    <script>
+      $(document).ready(function() {
+     $("#comment-form").submit(function(event) {
+       event.preventDefault();
+       
+       var username = $("#username").val();
+       var commentText = $("#comment-text").val();
+       
+       $.ajax({
+         type: "POST",
+         url: "{% url 'submit_comment' video.slug %}",
+         data: {
+           csrfmiddlewaretoken: "{{ csrf_token }}",
+           username: username,
+           comment_text: commentText
+         },
+         success: function(response) {
+           if (response.success) {
+             // Create a new message element
+             var messageElement = $("<div class='message'></div>");
+             
+             // User info
+             var userInfo = `
+               <div class='user-info'>
+                 <img src='https://static.vecteezy.com/system/resources/thumbnails/002/318/271/small/user-profile-icon-free-vector.jpg' alt='User'>
+                 <span class='user-name'>${username}</span>
+               </div>`;
+             messageElement.append(userInfo);
+             
+             // Message content
+             var messageContent = `<p class='message-content'>${commentText}</p>`;
+             messageElement.append(messageContent);
+             
+             // Append the message to the messages container
+             $("#messages").append(messageElement);
+             
+             // Clear the form fields
+             $("#username").val("");
+             $("#comment-text").val("");
+           }
+         },
+         error: function(xhr, textStatus, errorThrown) {
+           console.log("Error:", errorThrown);
+         }
+       });
+     });
+   });
+   
+     </script>
+{% endblock %}

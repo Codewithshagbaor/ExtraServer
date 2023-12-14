@@ -1,0 +1,92 @@
+{% load static %}
+<!DOCTYPE html>
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - MediconnectExtra Dashboard</title>
+    <link href="{% static 'css2?family=Inter:wght@400;500;600;700;800&display=swap' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.output.css' %}">
+    <script src="{% static 'gh/alpinejs/alpine%40v2.x.x/dist/alpine.min.js' %}" defer=""></script>
+    <script src="{% static 'assets/js/init-alpine.js' %}"></script>
+  </head>
+  <body>
+    <div class="flex items-center min-h-screen p-6 bg-gray-50 dark:bg-gray-900">
+      <div class="flex-1 h-full max-w-4xl mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
+        <div class="flex flex-col overflow-y-auto md:flex-row">
+          <div class="h-32 md:h-auto md:w-1/2">
+            <img aria-hidden="true" class="object-cover w-full h-full dark:hidden" src="{% static 'assets/img/login-office.jpeg' %}" alt="Office">
+            <img aria-hidden="true" class="hidden object-cover w-full h-full dark:block" src="{% static 'assets/img/login-office-dark.jpeg' %}" alt="Office">
+          </div>
+          <div class="flex items-center justify-center p-6 sm:p-12 md:w-1/2">
+            <div class="w-full">
+              <form>
+                <h1 class="mb-4 text-xl font-semibold text-gray-700 dark:text-gray-200">
+                  Login
+                </h1>
+                {% if request.user.is_authenticated %}
+                <p>Why Do you want to login again?</p>
+                {% endif %}
+                <label class="block text-sm">
+                  <span class="text-gray-700 dark:text-gray-400">Username</span>
+                  <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="Jane Doe" id="username">
+                </label>
+                <label class="block mt-4 text-sm">
+                  <span class="text-gray-700 dark:text-gray-400">Password</span>
+                  <input class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input" placeholder="***************" type="password" id="password">
+                </label>
+  
+                <button type="button" class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple" onclick="login();">Login</button>
+              </form>
+
+
+              <hr class="my-8">
+              <p class="mt-4">
+                <a class="text-sm font-medium text-purple-600 dark:text-purple-400 hover:underline" href="forgot-password.html">
+                  Forgot your password?
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const csrf = '{{csrf_token}}';
+          function login(){
+              username = document.getElementById("username").value;
+              pass = document.getElementById("password").value;
+              const formData = new FormData();
+              formData.append('username', username);
+              formData.append('password', pass);
+              const otherPram={
+                  body:formData,
+                  method:"POST",
+                  headers: {
+                      "X-CSRFToken": csrf
+                  },
+                  mode: "same-origin",
+              };
+              fetch("{% url 'login' %}", otherPram).then(res=>res.json())
+              .then(data=>{
+                  console.log(data);
+                  if (data.status == "success"){
+                    window.location = "{% url 'dashboard' %}";
+                  }
+                  else{
+                    alert(data.message)
+                  }
+              });
+          }
+  
+            document.addEventListener("keyup", function(event) {
+                if (event.keyCode === 13) {
+                    event.preventDefault();
+                    login();
+                }
+            });
+  </script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </body>
+</html>

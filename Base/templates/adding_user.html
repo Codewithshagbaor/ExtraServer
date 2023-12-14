@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+{% block title %}Adding You to Chat Room{% endblock %}
+{% block content %}
+{% if request.user.is_authenticated %}
+<div class="slider-area">
+  <div class="slider-height2 slider-bg2 d-flex align-items-center">
+  </div>
+</div>
+<main class="h-full pb-16 overflow-y-auto">
+  <!-- Remove everything INSIDE this div to a really blank page -->
+  <div class="container">
+    <div class="adding_div">
+      <h1 id="adding-message">Adding You to the Chat Room...</h1>
+      <p id="wait-message">Please wait while we add you to the chat room.</p>
+      <p id="redirect-message">You will be able to enter the chat room in <span id="countdown">5</span> seconds.</p>
+      <p id="enter-link"><a class="link_col" href="{% url 'enterRoom' room_id=room.room_id %}">Enter the chat room</a></p>
+    </div>
+  </div>
+</main>
+<script>
+  function showElement(elementId) {
+      let element = document.getElementById(elementId);
+      element.style.opacity = 1;
+      element.style.transform = 'translateY(0)';
+  }
+
+  function checkCompatibility() {
+      if (typeof window.onload === 'function') {
+          startChecking();
+      } else {
+          window.onload = startChecking;
+      }
+  }
+
+  function startChecking() {
+      showElement('adding-message');
+      showElement('wait-message');
+      setTimeout(() => {
+          showElement('redirect-message');
+          startCountdown();
+      }, 2000);
+  }
+
+  function startCountdown() {
+      let countdownElement = document.getElementById('countdown');
+      let enterLink = document.getElementById('enter-link');
+      let countdown = 5;
+      let countdownInterval = setInterval(() => {
+          countdown--;
+          countdownElement.textContent = countdown;
+          if (countdown === 0) {
+              clearInterval(countdownInterval);
+              showElement('enter-link');
+          }
+      }, 1000);
+  }
+
+  window.onload = checkCompatibility;
+</script>
+<style>
+  .adding_div{
+    width: 50%;
+    margin: 20px auto;
+    background-color: #fbf9ff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  #adding-message, #wait-message, #redirect-message, #enter-link {
+      font-size: 24px;
+      margin-bottom: 10px;
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  #countdown {
+      font-size: 24px;
+      font-weight: bold;
+  }
+  #enter-link {
+      opacity: 0;
+      transform: translateY(20px);
+      margin-top: 20px;
+  }
+  .link_col{
+    color: #000 !important;
+  }
+  @media screen and (max-width: 768px){
+    .adding_div{
+    width: 100%;
+  }
+  }
+</style>
+{% else %}
+<div class="slider-area">
+  <div class="slider-height2 slider-bg2 d-flex align-items-center">
+  </div>
+</div>
+<main class="h-full pb-16 overflow-y-auto">
+  <!-- Remove everything INSIDE this div to a really blank page -->
+  <div class="container">
+    <div class="comment-form">
+      <h4>SIGN IN TO PARTICIPATE
+      </h4>
+      <form class="form-contact comment_form" action="" id="commentForm" method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input class="form-control" name="name" id="name" type="text" placeholder="Name">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="form-group">
+              <input class="form-control" name="email" id="email" type="email" placeholder="Email">
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <button type="submit" class="button button-contactForm btn_1 boxed-btn">Submit</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</main>
+<style>
+  .comment-form{
+    width: 50%;
+    margin: 20px auto;
+    background-color: #fbf9ff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+  }
+  @media screen and (max-width: 768px){
+    .comment-form{
+    width: 100%;
+  }
+  }
+</style>
+{% endif %}
+{% endblock %}
