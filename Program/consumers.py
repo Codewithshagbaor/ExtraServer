@@ -33,7 +33,7 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
             }
         )
     async def call(self, user):
-        peer_connection = await self.createRTCPeerConnection(user.id)
+        peer_connection = await self.createRTCPeerConnection(self.user["id"])
         await self.createAndSendOffer(user.id, peer_connection)
 
     async def createRTCPeerConnection(self, user_id):
