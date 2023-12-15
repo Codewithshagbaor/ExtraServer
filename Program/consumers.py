@@ -8,6 +8,7 @@ from .service import add_remove_online_user, updateLocationList, add_remove_room
 from asgiref.sync import sync_to_async
 from channels.db import database_sync_to_async
 from aiortc import RTCPeerConnection, RTCSessionDescription, RTCIceCandidate
+from aiortc import RTCIceServer
 
 
 class ChatRoomConsumer(AsyncWebsocketConsumer):
