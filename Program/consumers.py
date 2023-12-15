@@ -39,7 +39,7 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
 
     async def createRTCPeerConnection(self, user_id):
         ice_server = RTCIceServer(urls="stun:bn-turn1.xirsys.com")
-        peer_connection = RTCPeerConnection(iceServers=[ice_server])
+        peer_connection = RTCPeerConnection()
 
         if self.localVideoStream:
             for track in self.localVideoStream.getTracks():
@@ -48,7 +48,11 @@ class ChatRoomConsumer(AsyncWebsocketConsumer):
         peer_connection.onicecandidate = lambda event: self.handleICEcandidate(user_id, event)
         peer_connection.ontrack = lambda event: self.handleAddStream(user_id, event)
 
+        # Configure ICE servers
+        await peer_connection.configure(ice_servers=[ice_server])
+
         return peer_connection
+
 
     async def createAndSendOffer(self, user_id, peer_connection):
         offer = await peer_connection.createOffer()
